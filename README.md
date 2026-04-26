@@ -40,9 +40,7 @@ TELKOM UNIVERSITY PURWOKERTO
 
 ---
 
-<p align="center">
-    <h3>Guided</h3>
-</p>
+<h3 align="center">Guided</h3>
 
 # Modul 12 - Laravel Database 1
 
@@ -194,10 +192,12 @@ Program menghasilkan fitur:
 
 ---
 
-<p align="center">
-    <h3>Unguided</h3>
-    Tugas Pertemuan 8
-</p>
+<div align="center">
+  <h3>Unguided</h3>
+  <p>Tugas Pertemuan 8</p>
+</div>
+
+<hr>
 
 # Git Branch
 
@@ -289,3 +289,31 @@ fitur-edit-mahasiswa
 fitur-delete-mahasiswa
 ```
 Branch main digunakan sebagai branch utama. Branch lain digunakan untuk mengerjakan fitur atau bagian tertentu secara terpisah.
+
+## Penjelasan Tugas 2
+Program yang dibuat adalah **website CRUD Data Mahasiswa berbasis Laravel** yang terhubung dengan database lokal.
+Fitur utamanya:
+
+* Menampilkan data mahasiswa
+* Menambah data mahasiswa
+* Mengedit data mahasiswa
+* Menghapus data mahasiswa
+
+Program ini menggunakan konsep **MVC Laravel**, yaitu model untuk database, controller untuk proses data, dan view untuk tampilan website. Data ditampilkan menggunakan **AJAX** agar halaman dapat mengambil data dari server.
+
+## Screenshot
+
+### Gambar 1. Tampilan Halaman Utama Data Mahasiswa
+![Tampilan Halaman Utama Data Mahasiswa](screenshot/Tampilan%20Halaman%20Utama%20Data%20Mahasiswa.png)
+
+### Gambar 2. Tampilan Halaman Tambah Data Mahasiswa
+![Tampilan Halaman Tambah Data Mahasiswa](screenshot/Tampilan%20Halaman%20Tambah%20Data%20Mahasiswa.png)
+
+### Gambar 3. Tampilan Halaman Edit Data Mahasiswa
+![Tampilan Halaman Edit Data Mahasiswa](screenshot/Tampilan%20Halaman%20Edit%20Data%20Mahasiswa.png)
+
+### Gambar 4. Tampilan Konfirmasi Hapus Data Mahasiswa
+![Tampilan Konfirmasi Hapus Data Mahasiswa](screenshot/Tampilan%20Konfirmasi%20Hapus%20Data%20Mahasiswa.png)
+
+### Gambar 5. Tampilan Database Tabel Mahasiswa pada HeidiSQL
+![Tampilan Database Tabel Mahasiswa pada HeidiSQL](screenshot/Tampilan%20Database%20Tabel%20Mahasiswa%20pada%20HeidiSQL.png)
