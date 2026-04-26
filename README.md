@@ -1,58 +1,291 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<h3 align="center">LAPORAN PRAKTIKUM</h3>
+<h3 align="center">APLIKASI BERBASIS PLATFORM</h3>
+<h3 align="center">Modul 12 & 13 </h3>
+
+<br>
+<p align="center">
+  <img src="screenshot/logo telkom university.png" width="150"/>
+</p>
+<br>
 
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+Disusun oleh:
+<br><br>
+D’SHARLENDITA FEBIANDA AURELIA  
+<br>
+2311102069  
+<br>
+S1 IF-11-04  
 </p>
 
-## About Laravel
+<br>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+<p align="center">
+Dosen Pengampu:
+<br>
+Cahyo Prihantoro, S.Kom., M.Eng  
+</p>
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+<br><br>
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+<p align="center">
+PROGRAM STUDI S1 INFORMATIKA  
+<br>
+FAKULTAS INFORMATIKA  
+<br>
+TELKOM UNIVERSITY PURWOKERTO  
+<br>
+2026  
+</p>
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+<p align="center">
+    <h3>Guided</h3>
+</p>
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+# Modul 12 - Laravel Database 1
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+Modul 12 membahas penggunaan database pada Laravel melalui pembuatan aplikasi CRUD produk. CRUD terdiri dari Create, Read, Update, dan Delete.
+Materi yang dipelajari pada modul ini meliputi konfigurasi database, migration, model, controller, view, route resource, templating, dan validasi form.
 
-## Agentic Development
+## Konfigurasi Database
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+Koneksi database diatur pada file `.env`.
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=ecommerce
+DB_USERNAME=root
+DB_PASSWORD=
+```
+Kode tersebut digunakan agar Laravel dapat terhubung dengan database MySQL bernama ecommerce.
 
+## Migration Product
+Migration digunakan untuk membuat struktur tabel database.
+```
+Schema::create('products', function (Blueprint $table) {
+    $table->id();
+    $table->string('name');
+    $table->integer('price');
+    $table->timestamps();
+});
+```
+Kode tersebut membuat tabel products dengan kolom id, name, price, created_at, dan updated_at.
+
+## Model Product
+```php
+class Product extends Model
+{
+    protected $fillable = ['name', 'price'];
+}
+```
+Model digunakan untuk menghubungkan Laravel dengan tabel database. Properti $fillable menentukan kolom yang boleh diisi.
+
+# Controller dan Route
+Controller dibuat menggunakan perintah:
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+php artisan make:controller ProductController --resource
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+Route resource digunakan untuk membuat route CRUD secara otomatis.
+```php
+Route::resource('product', ProductController::class);
+```
+Route tersebut otomatis menyediakan fitur untuk menampilkan, menambah, mengedit, memperbarui, dan menghapus data produk.
 
-## Contributing
+## Validasi Form
+```php
+$validated = $request->validate([
+    'name' => 'required|min:4',
+    'price' => 'required|integer|min:1000000',
+]);
+```
+Validasi digunakan untuk memastikan input user sesuai aturan. Nama produk wajib diisi minimal 4 karakter, sedangkan harga wajib berupa angka minimal 1000000.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Output Modul 12
 
-## Code of Conduct
+Program menghasilkan aplikasi CRUD produk dengan fitur:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- Menampilkan daftar produk
+- Menambah produk
+- Mengedit produk
+- Menghapus produk
+- Menampilkan pesan validasi jika input salah
 
-## Security Vulnerabilities
+# Modul 13 - Laravel Database 2
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Modul 13 membahas fitur lanjutan Laravel, yaitu session, middleware, autentikasi, dan relasi model.
 
-## License
+## Session
+Session digunakan untuk menyimpan data sementara user pada server.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```php
+session()->put('email', $u->email);
+session()->put('name', $u->name);
+```
+Kode tersebut menyimpan email dan nama user ke dalam session setelah login berhasil.
+
+Untuk logout, session dapat dihapus dengan:
+```php
+session()->flush();
+```
+
+## Middleware
+
+Middleware digunakan untuk membatasi akses halaman tertentu.
+```php
+Route::resource('product', ProductController::class)->middleware('auth');
+```
+Kode tersebut membuat halaman product hanya dapat diakses oleh user yang sudah login.
+
+## Auth Laravel
+
+Laravel menyediakan fitur Auth untuk proses login dan logout.
+```php
+if (Auth::attempt(['email' => $req->em, 'password' => $req->pwd])) {
+    return redirect('/product');
+}
+```
+Kode tersebut mengecek apakah email dan password sesuai dengan data user. Jika benar, user diarahkan ke halaman product.
+
+## Directive @auth
+
+```php
+@auth
+    {{ Auth::user()->name }}
+    <a href="/logout">Logout</a>
+@endauth
+```
+
+Directive @auth digunakan untuk menampilkan bagian tertentu hanya jika user sudah login.
+
+## Relasi Model
+
+Pada Modul 13, contoh relasi yang digunakan adalah relasi antara Product dan Variant.
+
+Satu Product dapat memiliki banyak Variant.
+
+```php
+public function variants()
+{
+    return $this->hasMany(Variant::class);
+}
+```
+
+Setiap Variant dimiliki oleh satu Product.
+```php
+public function product()
+{
+    return $this->belongsTo(Product::class);
+}
+```
+
+## Output Modul 13
+
+Program menghasilkan fitur:
+
+- Login
+- Logout
+- Pembatasan akses menggunakan middleware
+- Menampilkan data user yang sedang login
+- Relasi antara Product dan Variant
+
+---
+
+<p align="center">
+    <h3>Unguided</h3>
+    Tugas Pertemuan 8
+</p>
+
+# Git Branch
+
+Git branch adalah fitur Git untuk membuat cabang pengembangan dari project utama. Branch digunakan agar developer dapat mengerjakan fitur, perbaikan, atau percobaan baru tanpa langsung mengubah branch utama seperti `main` atau `master`.
+
+Dengan branch, pekerjaan menjadi lebih aman karena perubahan dilakukan secara terpisah. Setelah selesai, branch dapat digabungkan kembali ke branch utama menggunakan `merge`.
+
+Contoh branch:
+
+```bash
+main
+fitur-login
+fitur-tambah-data
+perbaikan-tampilan
+```
+
+## Fungsi Git Branch
+Fungsi Git branch antara lain:
+- Memisahkan pekerjaan berdasarkan fitur atau bagian project
+- Menjaga branch utama tetap aman dari perubahan yang belum selesai.
+- Memudahkan kerja sama tim.
+- Memudahkan percobaan fitur baru.
+- Memudahkan proses penggabungan kode ke branch utama.
+
+## Keuntungan Git Branch
+Keuntungan menggunakan Git branch yaitu:
+- Project lebih rapi dan teratur.
+- Branch utama tetap stabil.
+- Cocok untuk kerja tim.
+- Perubahan lebih mudah dilacak.
+- Bisa mengembangkan beberapa fitur sekaligus.
+
+### Perintah Git Branch
+## Melihat Branch
+```bash
+git branch
+```
+Output:
+```bash
+* main
+  fitur-tambah-data
+```
+Tanda * menunjukkan branch yang sedang digunakan.
+
+## Membuat Branch Baru
+```bash
+git branch fitur-tambah-data
+```
+## Membuat dan Langsung Pindah Branch
+```bash
+git checkout -b fitur-edit-data
+```
+
+Output:
+```bash
+Switched to a new branch 'fitur-edit-data'
+```
+
+## Berpindah Branch
+```bash
+git checkout fitur-tambah-data
+```
+
+## Upload Branch ke GitHub
+```bash
+git push -u origin fitur-edit-data
+```
+
+## Menggabungkan Branch
+```bash
+git checkout main
+git merge fitur-edit-data
+```
+
+## Menghapus Branch
+```
+git branch -d fitur-edit-data
+```
+
+### Contoh Penerapan
+Pada project website Data Mahasiswa, branch dapat digunakan untuk membagi pekerjaan.
+Contoh branch:
+```bash
+main
+dsharlendita
+RioCandra62
+fitur-tambah-mahasiswa
+fitur-edit-mahasiswa
+fitur-delete-mahasiswa
+```
+Branch main digunakan sebagai branch utama. Branch lain digunakan untuk mengerjakan fitur atau bagian tertentu secara terpisah.
